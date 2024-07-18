@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="grocerystore" basedir="." default="init">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}${file.separator}classes"/>
+    <property name="dist.dir" value="${build.dir}${file.separator}dist"/>
+
+    <target name="init" depends="clean,createdirs,compile,package,execute"/>
+
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="createdirs">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+    </target>
+
+    <target name="package">
+        <jar destfile="${dist.dir}${file.separator}${ant.project.name}.jar" basedir="${classes.dir}"/>
+    </target>
+
+    <target name="execute">
+        <java classname="com.gstore.main.App" classpath="${dist.dir}${file.separator}${ant.project.name}.jar"/>
+    </target>
+</project>
+
+
+
+
+
+
+
